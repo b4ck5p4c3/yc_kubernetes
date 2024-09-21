@@ -38,7 +38,7 @@ resource "yandex_compute_disk" "test-a-disk" {
   type     = "network-hdd"
   zone     = "ru-central1-a"
   size     = "20"
-  image_id = "fd80293ig2816a78q276"
+  image_id = "fd84uoseqemi8gihbs05"
 }
 
 resource "yandex_compute_disk" "test-b-disk" {
@@ -46,7 +46,7 @@ resource "yandex_compute_disk" "test-b-disk" {
   type     = "network-hdd"
   zone     = "ru-central1-b"
   size     = "20"
-  image_id = "fd80293ig2816a78q276"
+  image_id = "fd84uoseqemi8gihbs05"
 }
 
 resource "yandex_compute_disk" "test-d-disk" {
@@ -54,7 +54,31 @@ resource "yandex_compute_disk" "test-d-disk" {
   type     = "network-hdd"
   zone     = "ru-central1-d"
   size     = "20"
-  image_id = "fd80293ig2816a78q276"
+  image_id = "fd84uoseqemi8gihbs05"
+}
+
+resource "yandex_vpc_address" "test-addr-a" {
+  name = "test-a"
+
+  external_ipv4_address {
+    zone_id = "ru-central1-a"
+  }
+}
+
+resource "yandex_vpc_address" "test-addr-b" {
+  name = "test-b"
+
+  external_ipv4_address {
+    zone_id = "ru-central1-b"
+  }
+}
+
+resource "yandex_vpc_address" "test-addr-d" {
+  name = "test-d"
+
+  external_ipv4_address {
+    zone_id = "ru-central1-d"
+  }
 }
 
 resource "yandex_compute_instance" "test-a" {
@@ -72,10 +96,16 @@ resource "yandex_compute_instance" "test-a" {
 
   network_interface {
     subnet_id = yandex_vpc_subnet.test_subnet_a.id
+    nat = true
+    nat_ip_address = yandex_vpc_address.test-addr-a.external_ipv4_address[0].address
   }
 
   scheduling_policy {
     preemptible = true
+  }
+
+  metadata = {
+    enable-oslogin = true
   }
 }
 
@@ -94,10 +124,16 @@ resource "yandex_compute_instance" "test-b" {
 
   network_interface {
     subnet_id = yandex_vpc_subnet.test_subnet_b.id
+    nat = true
+    nat_ip_address = yandex_vpc_address.test-addr-b.external_ipv4_address[0].address
   }
 
   scheduling_policy {
     preemptible = true
+  }
+  
+  metadata = {
+    enable-oslogin = true
   }
 }
 
@@ -117,6 +153,8 @@ resource "yandex_compute_instance" "test-d" {
 
   network_interface {
     subnet_id = yandex_vpc_subnet.test_subnet_d.id
+    nat = true
+    nat_ip_address = yandex_vpc_address.test-addr-d.external_ipv4_address[0].address 
   }
 
   scheduling_policy {
