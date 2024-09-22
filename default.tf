@@ -5,11 +5,30 @@ terraform {
     }
   }
   required_version = ">= 0.13"
+
+  backend "s3" {
+    endpoints = {
+      s3 = "storage.yandexcloud.net"
+    }
+    bucket = "b4cksp4ce-terraform-tfstate"
+    key    = "terraform/main.tfstate"
+    region = "ru-central1"
+    access_key = var.s3_access_key
+    secret_key = var.s3_secret_key
+
+    skip_region_validation      = true
+    skip_credentials_validation = true
+    skip_requesting_account_id  = true # This option is required to describe backend for Terraform version 1.6.1 or higher.
+    skip_s3_checksum            = true # This option is required to describe backend for Terraform version 1.6.3 or higher.
+  }
 }
 
 provider "yandex" {
   zone = "ru-central1-a"
 }
+
+variable "s3_access_key" {}
+variable "s3_secret_key" {}
 
 variable "zones" {
   type    = list(string)
