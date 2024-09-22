@@ -106,7 +106,7 @@ resource "yandex_lb_target_group" "kuber_lb_target_group" {
   }
 }
 
-resource "yandex_lb_network_load_balancer" "foo" {
+resource "yandex_lb_network_load_balancer" "kuber_lb" {
   name = "kuber-lb"
 
   listener {
