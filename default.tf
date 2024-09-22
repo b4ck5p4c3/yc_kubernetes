@@ -27,8 +27,8 @@ resource "yandex_compute_disk" "kuber_disks" {
   name     = "kuber-${count.index}"
   type     = "network-ssd"
   zone     = var.zones[count.index]
-  size     = "93"
-  image_id = "fd83h72fb5urnmt6vkfd"
+  size     = "20"
+  image_id = "fd84uoseqemi8gihbs05"
 }
 
 resource "yandex_compute_placement_group" "kuber_pg" {
