@@ -5,8 +5,8 @@ if [ ! -f .env ]; then
 else
     source .env
 
-    export TF_VAR_s3_access_key
-    export TF_VAR_s3_secret_key
+    export AWS_ACCESS_KEY_ID
+    export AWS_SECRET_ACCESS_KEY
 
     export YC_TOKEN=$(yc iam create-token)
     export YC_CLOUD_ID=$(yc config get cloud-id)

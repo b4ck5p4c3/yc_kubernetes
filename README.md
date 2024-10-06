@@ -17,36 +17,40 @@
 See: https://yandex.cloud/en-ru/docs/cli/quickstart#install
 
 ## Yandex Provider setup:
+1. Init yc profile with your account:
+```
+yc init
+```
 
-1. Now, Inside Yandex Cloud Console go ahead and create service account with following permissions: `vpc_admin`, `compute.editor`.
+2. Now, Inside Yandex Cloud Console go ahead and find service account `terraform-deploy` with following permissions: `vpc_admin`, `compute.editor`.
 
-2. Create authorized key for your service account.
+3. Create authorized key for your service account.
 ```
 yc iam key create \
   --service-account-id <service_account_ID> \
-  --folder-name <name_of_folder_with_service_account> \
+  --description "<nickname>" \
   --output key.json
 ```
-3. Create CLI profile to run operations on behalf of the service account:
+4. Create CLI profile to run operations on behalf of the service account:
    `yc config profile create <profile_name>`
 
-4. Set the profile configuration:
+5. Set the profile configuration:
 ```
 yc config set service-account-key key.json 
 yc config set cloud-id <cloud_ID> 
 yc config set folder-id <folder_ID>
 ```
 
-5. Export credentials to your environment:
+6. Export credentials to your environment:
 * Bash / Zsh:
 ```
-./env_prepare.sh
+source ./env_prepare.sh
 ```
 > [TODO: find a way for automatic obtaining s3 keys]
 
 * PowerShell:
 ```
-bash ./env-prepare.sh
+bash source ./env-prepare.sh
 ```
 > [!WARNING] 
 > Tokens are alive for only 12 Hours!
