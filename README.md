@@ -22,7 +22,7 @@ See: https://yandex.cloud/en-ru/docs/cli/quickstart#install
 yc init
 ```
 
-2. Now, Inside Yandex Cloud Console go ahead and find service account `terraform-deploy` with following permissions: `vpc_admin`, `compute.editor`.
+2. Now, Inside Yandex Cloud Console go ahead and find service account `terraform-deploy` with following permissions: `vpc.admin`, `compute.admin`, `load-balancer.admin`.
 
 3. Create authorized key for your service account.
 ```
