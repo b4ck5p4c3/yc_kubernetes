@@ -18,7 +18,7 @@ See: https://yandex.cloud/en-ru/docs/cli/quickstart#install
 
 ## Yandex Provider setup:
 
-1. Now, Inside Yandex Cloud Console go ahead and create service account with following permissions: `admin`, `vpc_admin`, `compute.editor`.
+1. Now, Inside Yandex Cloud Console go ahead and create service account with following permissions: `vpc_admin`, `compute.editor`.
 
 2. Create authorized key for your service account.
 ```
@@ -40,16 +40,13 @@ yc config set folder-id <folder_ID>
 5. Export credentials to your environment:
 * Bash / Zsh:
 ```
-export YC_TOKEN=$(yc iam create-token)
-export YC_CLOUD_ID=$(yc config get cloud-id)
-export YC_FOLDER_ID=$(yc config get folder-id)
+./env_prepare.sh
 ```
+> [TODO: find a way for automatic obtaining s3 keys]
 
 * PowerShell:
 ```
-$Env:YC_TOKEN=$(yc iam create-token) 
-$Env:YC_CLOUD_ID=$(yc config get cloud-id) 
-$Env:YC_FOLDER_ID=$(yc config get folder-id)
+bash ./env-prepare.sh
 ```
 > [!WARNING] 
 > Tokens are alive for only 12 Hours!
@@ -67,13 +64,19 @@ Create `.tofurc` file with following code:
 provider_installation {
   network_mirror {
     url = "https://terraform-mirror.yandexcloud.net/"
-    include = ["registry.terraform.io/*/*"]
+    include = ["registry.opentofu.org/*/*"]
   }
   direct {
-    exclude = ["registry.terraform.io/*/*"]
+    exclude = ["registry.opentofu.org/*/*"]
   }
 }
 ```
 3. Test your terraform configuration with `tofu plan`
 4. Apply your configuration to yandex cloud: `tofu apply`
 5. Destroy everything in the cloud: `tofu destroy`
+
+### TODO:
+* add (encrypted? from vault?) .env with s3 keys to repo
+* switch in terraform configuration `yandex_compute_placement_group` to `yandex_compute_instance_group`
+* write ansible playbooks to deploy kubernetes cluster via [kubespray](https://github.com/kubernetes-sigs/kubespray)
+* switch port in healthchecks to k8s cluster's port
