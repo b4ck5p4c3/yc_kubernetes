@@ -104,7 +104,6 @@ resource "yandex_compute_instance" "kuber_instances" {
 
   metadata = {
     enable-oslogin = true
-    ssh-keys = "ubuntu:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICRggREl9QpxjSp/kZzFp6XS9dvhfntcH6sZs1dtN6Q7"
   }
 }
 
