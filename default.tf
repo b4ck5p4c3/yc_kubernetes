@@ -25,9 +25,6 @@ provider "yandex" {
   zone = "ru-central1-a"
 }
 
-variable "s3_access_key" {}
-variable "s3_secret_key" {}
-
 variable "zones" {
   type    = list(string)
   default = ["ru-central1-a", "ru-central1-b", "ru-central1-d"]
