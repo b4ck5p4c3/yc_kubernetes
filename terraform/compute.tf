@@ -20,8 +20,8 @@ resource "yandex_compute_instance" "kuber_instances" {
   platform_id = var.zones[count.index] == "ru-central1-d" ? "standard-v3" : "standard-v1"
 
   resources {
-    cores  = 2
-    memory = 2
+    cores         = 2
+    memory        = 2
     core_fraction = 20
   }
 

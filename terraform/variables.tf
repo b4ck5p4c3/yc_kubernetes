@@ -4,6 +4,6 @@ variable "zones" {
 }
 
 variable "kubeapi_port" {
-  type = number 
+  type    = number
   default = 8080
 }

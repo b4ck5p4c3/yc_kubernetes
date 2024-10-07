@@ -44,7 +44,6 @@ yc config set folder-id <folder_ID>
 ```
 source ./env_prepare.sh
 ```
-> [TODO: find a way for automatic obtaining s3 keys]
 
 > [!WARNING] 
 > Tokens are alive for only 12 Hours!
@@ -74,7 +73,7 @@ provider_installation {
 5. Destroy everything in the cloud: `tofu destroy`
 
 ### TODO:
-* add (encrypted? from vault?) .env with s3 keys to repo
 * switch in terraform configuration `yandex_compute_placement_group` to `yandex_compute_instance_group`
 * write ansible playbooks to deploy kubernetes cluster via [kubespray](https://github.com/kubernetes-sigs/kubespray)
 * switch port in healthchecks to k8s cluster's port
+* add alerts? monitoring?
