@@ -11,8 +11,6 @@
 * Linux:
   * Quick: `curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash`
   * Other: Seek your distro repos!
-* Windows: 
-  * Powershell: `iex (New-Object System.Net.WebClient).DownloadString('https://storage.yandexcloud.net/yandexcloud-yc/install.ps1')`
 
 See: https://yandex.cloud/en-ru/docs/cli/quickstart#install
 
@@ -42,16 +40,11 @@ yc config set folder-id <folder_ID>
 ```
 
 6. Export credentials to your environment:
-* Bash / Zsh:
 ```
 source ./env_prepare.sh
 ```
 > [TODO: find a way for automatic obtaining s3 keys]
 
-* PowerShell:
-```
-bash source ./env-prepare.sh
-```
 > [!WARNING] 
 > Tokens are alive for only 12 Hours!
 
