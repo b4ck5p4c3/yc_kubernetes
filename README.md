@@ -3,6 +3,7 @@
 ### Requirements:
 * OpenTofu
 * Yandex Cloud CLI
+* jq
 
 ### Yandex Cloud CLI installation
 * MacOS:
